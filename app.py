@@ -32,8 +32,12 @@ database = {
 
 
 # Function to identify the person
-def who_is_it(image_path, database, model):
-    encoding = img_to_encoding(image_path, model)
+def who_is_it(image, database, model):
+    image = image.resize((160, 160))
+    img = np.around(np.array(image) / 255.0, decimals=12)
+    x_train = np.expand_dims(img, axis=0)
+    embedding = model.predict_on_batch(x_train)
+    encoding = embedding / np.linalg.norm(embedding, ord=2)
     min_dist = 100
     identity = None
 
@@ -66,9 +70,9 @@ def predict():
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
-    image_path = Image.open(BytesIO(file.read()))
+    image = Image.open(BytesIO(file.read()))
 
-    result = who_is_it(image_path, database, FRmodel)
+    result = who_is_it(image, database, FRmodel)
 
     # Return the result
     return jsonify({'result': result})
