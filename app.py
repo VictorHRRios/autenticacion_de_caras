@@ -27,7 +27,15 @@ def img_to_encoding(image_path, model):
 
 # Initialize the database
 database = {
-    "victor": img_to_encoding("victor.jpg", FRmodel)
+    "victor": img_to_encoding("victor.jpg", FRmodel),
+    "antonio": img_to_encoding("antonio.jpeg", FRmodel),
+    "daniel": img_to_encoding("Daniel8A.jpg", FRmodel),
+    "gael": img_to_encoding("gael.jpg", FRmodel),
+    "santiago": img_to_encoding("gsrrobles.jpg", FRmodel),
+    "isaac": img_to_encoding("Isaac.jpg", FRmodel),
+    "manuel": img_to_encoding("manuel.jpg", FRmodel),
+    "manuelM": img_to_encoding("ManuelM.jpg", FRmodel),
+    "mario": img_to_encoding("mario.jpeg", FRmodel),
 }
 
 
