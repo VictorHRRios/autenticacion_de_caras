@@ -2,7 +2,8 @@ from flask import Flask, render_template, request, jsonify
 import tensorflow as tf
 import numpy as np
 from tensorflow.keras.models import model_from_json
-
+from io import BytesIO
+from PIL import Image
 app = Flask(__name__)
 
 # Load model
@@ -65,11 +66,8 @@ def predict():
     if file.filename == '':
         return jsonify({'error': 'No selected file'})
 
-    # Save the uploaded file
-    image_path = 'uploaded_image.jpg'
-    file.save(image_path)
+    image_path = Image.open(BytesIO(file.read()))
 
-    # Run the prediction
     result = who_is_it(image_path, database, FRmodel)
 
     # Return the result
